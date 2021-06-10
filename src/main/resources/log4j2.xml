@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+
+    <Properties>
+        <!-- <Property name="layoutPattern">%d [%t] %-5level %c(%M:%L) - %m%n</Property> -->
+        <Property name="layoutPattern">%-5p : %c - %m%n</Property>
+    </Properties>
+
+    <!-- 로그의 출력 위치 지정 -->
+    <!-- console : 화면 -->
+    <!-- file : 외부 파일 -->
+    <!-- DB, JDBC : 데이터베이스 -->
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${layoutPattern}" />
+        </Console>
+    </Appenders>
+
+    <!-- 기본 레벨은 info -->
+    <Loggers>
+        <Root level="info" additivity="false" >
+            <AppenderRef ref="console" />
+        </Root>
+
+        <!-- 스프링 프레임워크에서 찍는건 level을 info로 설정 -->
+        <logger name="org.springframework.*" additivity="false" >
+            <AppenderRef ref="console" level="info" />
+        </logger>
+
+        <logger name="org.apache.ibatis.*" additivity="false" >
+            <AppenderRef ref="console" level="info" />
+        </logger>
+
+        <logger name="org.mybatis.*" additivity="false" >
+            <AppenderRef ref="console" level="debug" />
+        </logger>
+
+        <Logger name="org.springframework.jdbc.core.JdbcTemplate"
+                level="debug" />
+
+        <Logger name="org.springframework.jdbc.core.StatementCreatorUtils"
+                level="trace" />
+
+        <logger name="siestageek.spring.mvc.*" additivity="false" >
+            <AppenderRef ref="console" level="info" />
+        </logger>
+
+    </Loggers>
+</Configuration>
